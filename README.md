@@ -1,11 +1,11 @@
-# @philiprehberger/http-client
+# @philiprehberger/ts-http-client
 
 Type-safe fetch wrapper with interceptors, retries, and base URL support.
 
 ## Installation
 
 ```bash
-npm install @philiprehberger/http-client
+npm install @philiprehberger/ts-http-client
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm install @philiprehberger/http-client
 ### Basic
 
 ```ts
-import { createClient } from '@philiprehberger/http-client';
+import { createClient } from '@philiprehberger/ts-http-client';
 
 const api = createClient({
   baseURL: 'https://api.example.com',
@@ -87,7 +87,7 @@ controller.abort();
 ### Error Handling
 
 ```ts
-import { HttpError } from '@philiprehberger/http-client';
+import { HttpError } from '@philiprehberger/ts-http-client';
 
 try {
   await api.get('/not-found');

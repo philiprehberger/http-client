@@ -1,5 +1,5 @@
 {
-  "name": "@philiprehberger/http-client",
+  "name": "@philiprehberger/ts-http-client",
   "version": "0.2.0",
   "description": "Type-safe fetch wrapper with interceptors, retries, and base URL support",
   "type": "module",
@@ -45,11 +45,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/philiprehberger/http-client.git"
+    "url": "git+https://github.com/philiprehberger/ts-http-client.git"
   },
-  "homepage": "https://github.com/philiprehberger/http-client#readme",
+  "homepage": "https://github.com/philiprehberger/ts-http-client#readme",
   "bugs": {
-    "url": "https://github.com/philiprehberger/http-client/issues"
+    "url": "https://github.com/philiprehberger/ts-http-client/issues"
   },
   "author": "Philip Rehberger",
   "engines": {
