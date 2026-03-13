@@ -25,6 +25,8 @@ const created = await api.post<User>('/users', { body: { name: 'Alice' } });
 await api.put<User>('/users/1', { body: { name: 'Bob' } });
 await api.patch<User>('/users/1', { body: { name: 'Bob' } });
 await api.delete('/users/1');
+await api.head('/users/1');
+await api.options('/users');
 ```
 
 ### Query Parameters
@@ -93,6 +95,16 @@ const api = createClient({ timeout: 5000 });
 await api.get('/slow-endpoint', { timeout: 30000 });
 ```
 
+### Response Type
+
+```ts
+// Force response parsing regardless of Content-Type header
+const html = await api.get<string>('/page', { responseType: 'text' });
+const data = await api.get<Blob>('/file', { responseType: 'blob' });
+const buf = await api.get<ArrayBuffer>('/binary', { responseType: 'arrayBuffer' });
+const json = await api.get<MyType>('/data', { responseType: 'json' });
+```
+
 ### Abort Signal
 
 ```ts
@@ -131,6 +143,8 @@ Returns an HTTP client with the following methods:
 | `put` | `<T>(path, opts?) => Promise<T>` | PUT request. |
 | `patch` | `<T>(path, opts?) => Promise<T>` | PATCH request. |
 | `delete` | `<T>(path, opts?) => Promise<T>` | DELETE request. |
+| `head` | `<T>(path, opts?) => Promise<T>` | HEAD request. |
+| `options` | `<T>(path, opts?) => Promise<T>` | OPTIONS request. |
 | `onRequest` | `(interceptor) => void` | Add a request interceptor. |
 | `onResponse` | `(interceptor) => void` | Add a response interceptor. |
 
@@ -164,6 +178,7 @@ Returns an HTTP client with the following methods:
 | `body` | `unknown` | Request body (auto-serialized to JSON). |
 | `timeout` | `number` | Per-request timeout override. |
 | `signal` | `AbortSignal` | Abort signal for cancellation. |
+| `responseType` | `'json' \| 'text' \| 'blob' \| 'arrayBuffer'` | Force response parsing method (overrides Content-Type auto-detect). |
 
 ### `HttpError`
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0
+
+- Add `responseType` option to force response parsing (`json`, `text`, `blob`, `arrayBuffer`)
+- Add `head()` and `options()` HTTP methods
+- Fix signal listener cleanup when both `signal` and `timeout` are provided (prevents memory leaks)
+
 ## 0.3.0
 
 - Add auth helper (bearer and basic authentication)

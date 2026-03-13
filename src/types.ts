@@ -30,6 +30,7 @@ export interface RequestOptions {
   body?: unknown;
   timeout?: number;
   signal?: AbortSignal;
+  responseType?: 'json' | 'text' | 'blob' | 'arrayBuffer';
 }
 
 export type RequestInterceptor = (request: Request) => Request | Promise<Request>;

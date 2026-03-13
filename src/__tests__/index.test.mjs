@@ -11,6 +11,8 @@ describe('createClient', () => {
     assert.equal(typeof client.put, 'function');
     assert.equal(typeof client.patch, 'function');
     assert.equal(typeof client.delete, 'function');
+    assert.equal(typeof client.head, 'function');
+    assert.equal(typeof client.options, 'function');
     assert.equal(typeof client.onRequest, 'function');
     assert.equal(typeof client.onResponse, 'function');
   });

@@ -97,6 +97,8 @@ export function createClient(options: ClientOptions = {}) {
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       const start = Date.now();
       let timeoutId: ReturnType<typeof setTimeout> | undefined;
+      let externalSignal: AbortSignal | undefined;
+      let onExternalAbort: (() => void) | undefined;
 
       try {
         const timeout = opts?.timeout ?? defaultTimeout;
@@ -105,12 +107,14 @@ export function createClient(options: ClientOptions = {}) {
         if (timeout && !signal) {
           signal = AbortSignal.timeout(timeout);
         } else if (timeout && signal) {
+          externalSignal = signal;
           const controller = new AbortController();
           timeoutId = setTimeout(() => controller.abort(new Error('Request timeout')), timeout);
-          signal.addEventListener('abort', () => {
+          onExternalAbort = () => {
             clearTimeout(timeoutId);
-            controller.abort(signal!.reason);
-          }, { once: true });
+            controller.abort(externalSignal!.reason);
+          };
+          externalSignal.addEventListener('abort', onExternalAbort, { once: true });
           signal = controller.signal;
         }
 
@@ -148,11 +152,28 @@ export function createClient(options: ClientOptions = {}) {
         }
 
         let data: T;
-        const contentType = response.headers.get('Content-Type') ?? '';
-        if (contentType.includes('application/json')) {
-          data = await response.json() as T;
+        if (opts?.responseType) {
+          switch (opts.responseType) {
+            case 'json':
+              data = await response.json() as T;
+              break;
+            case 'text':
+              data = await response.text() as unknown as T;
+              break;
+            case 'blob':
+              data = await response.blob() as unknown as T;
+              break;
+            case 'arrayBuffer':
+              data = await response.arrayBuffer() as unknown as T;
+              break;
+          }
         } else {
-          data = await response.text() as unknown as T;
+          const contentType = response.headers.get('Content-Type') ?? '';
+          if (contentType.includes('application/json')) {
+            data = await response.json() as T;
+          } else {
+            data = await response.text() as unknown as T;
+          }
         }
 
         let enhanced: EnhancedResponse = {
@@ -181,6 +202,9 @@ export function createClient(options: ClientOptions = {}) {
         if (timeoutId !== undefined) {
           clearTimeout(timeoutId);
         }
+        if (externalSignal && onExternalAbort) {
+          externalSignal.removeEventListener('abort', onExternalAbort);
+        }
       }
     }
 
@@ -193,6 +217,8 @@ export function createClient(options: ClientOptions = {}) {
     put: <T>(path: string, opts?: RequestOptions) => request<T>('PUT', path, opts),
     patch: <T>(path: string, opts?: RequestOptions) => request<T>('PATCH', path, opts),
     delete: <T>(path: string, opts?: RequestOptions) => request<T>('DELETE', path, opts),
+    head: <T>(path: string, opts?: RequestOptions) => request<T>('HEAD', path, opts),
+    options: <T>(path: string, opts?: RequestOptions) => request<T>('OPTIONS', path, opts),
     onRequest,
     onResponse,
   };
