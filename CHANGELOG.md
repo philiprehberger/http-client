@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.3
+
+- Add Development section to README
+- Fix CI badge to reference publish.yml
+
 ## 0.4.0
 
 - Add `responseType` option to force response parsing (`json`, `text`, `blob`, `arrayBuffer`)
