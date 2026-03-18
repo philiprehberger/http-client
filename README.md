@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/@philiprehberger/http-client.svg)](https://www.npmjs.com/package/@philiprehberger/http-client)
 [![License](https://img.shields.io/github/license/philiprehberger/http-client)](LICENSE)
 
-Type-safe fetch wrapper with interceptors, retries, and base URL support.
+Type-safe fetch wrapper with interceptors, retries, and base URL support
 
 ## Installation
 
