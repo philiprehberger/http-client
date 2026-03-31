@@ -1,9 +1,8 @@
 # @philiprehberger/http-client
 
-[![CI](https://github.com/philiprehberger/ts-http-client/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/ts-http-client/actions/workflows/ci.yml)
+[![CI](https://github.com/philiprehberger/http-client/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/http-client/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@philiprehberger/http-client.svg)](https://www.npmjs.com/package/@philiprehberger/http-client)
-[![License](https://img.shields.io/github/license/philiprehberger/ts-http-client)](LICENSE)
-[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
+[![Last updated](https://img.shields.io/github/last-commit/philiprehberger/http-client)](https://github.com/philiprehberger/http-client/commits/main)
 
 Type-safe fetch wrapper with interceptors, retries, and base URL support
 
@@ -194,7 +193,6 @@ Returns an HTTP client with the following methods:
 | `url` | `string` | Request URL. |
 | `body` | `unknown` | Parsed response body. |
 
-
 ## Development
 
 ```bash
@@ -203,6 +201,24 @@ npm run build
 npm test
 ```
 
+## Support
+
+If you find this project useful:
+
+⭐ [Star the repo](https://github.com/philiprehberger/http-client)
+
+🐛 [Report issues](https://github.com/philiprehberger/http-client/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+💡 [Suggest features](https://github.com/philiprehberger/http-client/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
+
+❤️ [Sponsor development](https://github.com/sponsors/philiprehberger)
+
+🌐 [All Open Source Projects](https://philiprehberger.com/open-source-packages)
+
+💻 [GitHub Profile](https://github.com/philiprehberger)
+
+🔗 [LinkedIn Profile](https://www.linkedin.com/in/philiprehberger)
+
 ## License
 
-MIT
+[MIT](LICENSE)
